@@ -1,4 +1,5 @@
 ﻿@page "/"
+@inject IConfiguration config
 
 <PageTitle>Index</PageTitle>
 
@@ -6,4 +7,38 @@
 
 Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@foreach(var taskdo in taskdos) {
+    @if(!taskdo.IsCompleted && bool.Parse(config["toggle"] ?? "true")) {
+        
+        <div class="d-flex flex-row">
+
+            <input type="checkbox" @bind="taskdo.IsCompleted"/>
+            <p>@taskdo.Description</p>    
+        </div>
+    }
+}
+
+
+@code{
+    List<TaskDo> taskdos = new List<TaskDo> {
+        new TaskDo("code better"),
+        new TaskDo("Jonathan wants us to rename things.")
+    };
+
+    protected override async Task OnInitializedAsync() {
+        await Task.CompletedTask;
+    }
+
+    public class TaskDo{
+        string desc;
+        bool isCompleted;
+
+        public string Description{ get => desc; }
+        public bool IsCompleted { get; set; } = false;
+        public TaskDo(string desc) {
+            this.desc = desc;
+        }
+
+        
+    }
+}
