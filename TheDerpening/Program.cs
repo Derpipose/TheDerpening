@@ -1,12 +1,18 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using TheDerpening.Data;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddDbContext<ListDbContext>(
+    options => options.UseSqlServer("Data Source=(localDb)\\MSSLLocalDb;Initial Catalog=ListDb")
+    ) ;
 
 var app = builder.Build();
 
