@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddDbContext<ListDbContext>(
-    options => options.UseSqlServer("Data Source=(localDb)\\MSSLLocalDb;Initial Catalog=ListDb")
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("ListDb"))
     ) ;
 
 var app = builder.Build();

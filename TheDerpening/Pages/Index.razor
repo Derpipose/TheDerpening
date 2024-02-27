@@ -7,6 +7,8 @@
 
 Welcome to your new app.
 
+@*
+
 @foreach(var taskdo in taskdos) {
     @if(!taskdo.IsCompleted && bool.Parse(config["toggle"] ?? "true")) {
         
@@ -18,9 +20,10 @@ Welcome to your new app.
     }
 }
 
+*@
 
 @code{
-    List<TaskDo> taskdos = new List<TaskDo> {
+   /* List<TaskDo> taskdos = new List<TaskDo> {
         new TaskDo("code better"),
         new TaskDo("Jonathan wants us to rename things.")
     };
@@ -38,7 +41,5 @@ Welcome to your new app.
         public TaskDo(string desc) {
             this.desc = desc;
         }
-
-        
-    }
+    } */
 }
