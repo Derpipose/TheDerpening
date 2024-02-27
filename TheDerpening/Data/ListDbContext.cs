@@ -8,5 +8,6 @@ namespace TheDerpening.Data {
         public ListDbContext(DbContextOptions<ListDbContext> options) : base(options) {
         }
 
+
     }
 }

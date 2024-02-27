@@ -10,11 +10,21 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddDbContext<ListDbContext>(
+builder.Services.AddDbContextFactory<ListDbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("ListDb"))
     ) ;
 
 var app = builder.Build();
+
+await Databasemigration(app.Services);
+
+async Task Databasemigration(IServiceProvider services) {
+    using var scope = services.CreateScope();
+    using var ctx = scope.ServiceProvider.GetService<DbContext>(); 
+    if(ctx != null ) { 
+        await ctx.Database.MigrateAsync();   
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment()) {

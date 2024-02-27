@@ -1,28 +1,59 @@
 ﻿@page "/"
 @inject IConfiguration config
+@inject IDbContextFactory<ListDbContext> ContextFactory
 
-<PageTitle>Index</PageTitle>
+<PageTitle>To Do List</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Hello there!</h1>
 
-Welcome to your new app.
+Welcome to your todo list
 
-@*
+<EditForm Model="@AddnewItem" OnValidSubmit="@HandleValidSubmit">
 
-@foreach(var taskdo in taskdos) {
-    @if(!taskdo.IsCompleted && bool.Parse(config["toggle"] ?? "true")) {
+    <label for="title" class="form-label">Item</label>
+    <InputText id="title" class="form-control"
+                @bind-Value="AddnewItem.Title"/>
+    <button type="submit" class="btn btn-primary">Add</button>
+</EditForm>
+
+@if (ToDos != null) {
+    @foreach(var taskdo in ToDos) {
+        @if(!taskdo.IsCompleted && bool.Parse(config["toggle"] ?? "true")) {
         
-        <div class="d-flex flex-row">
+            <div class="d-flex flex-row">
 
-            <input type="checkbox" @bind="taskdo.IsCompleted"/>
-            <p>@taskdo.Description</p>    
-        </div>
+                <input type="checkbox" @*@bind="taskdo.IsCompleted"*@/>
+                <p>@taskdo.Title</p>    
+            </div>
+        }
     }
 }
 
-*@
 
 @code{
+
+    private TodoListItem[]? ToDos{ get; set; }
+
+    public TodoListItem? AddnewItem = new();
+
+    protected override async Task OnInitializedAsync() {
+        using var context = ContextFactory.CreateDbContext();
+        ToDos = await context.Todos.ToArrayAsync();
+        AddnewItem = new();
+
+    }
+
+    private async Task HandleValidSubmit() {
+        if (AddnewItem is not null) {
+            using var context = ContextFactory.CreateDbContext();
+            context.Todos.Add(AddnewItem);
+            await context.SaveChangesAsync();
+            AddnewItem = new();
+
+        }
+    }
+
+
    /* List<TaskDo> taskdos = new List<TaskDo> {
         new TaskDo("code better"),
         new TaskDo("Jonathan wants us to rename things.")
