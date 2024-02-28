@@ -21,7 +21,7 @@ builder.Services.AddDbContextFactory<ListDbContext>(
 
 var app = builder.Build();
 
-await Databasemigration(app.Services);
+//await Databasemigration(app.Services);
 
 async Task Databasemigration(IServiceProvider services) {
     using var scope = services.CreateScope();

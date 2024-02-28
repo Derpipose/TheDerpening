@@ -22,7 +22,8 @@ Welcome to your todo list
         
             <div class="d-flex flex-row">
 
-                <input type="checkbox" @*@bindevent="@completeTask(taskdo)" *@  />
+                <input type="checkbox" onchange="@(() => completeTask(taskdo))" />
+
                 <p>@taskdo.Title</p>    
             </div>
         }
@@ -54,12 +55,12 @@ Welcome to your todo list
     }
 
     private async Task completeTask(TodoListItem listItem) {
-        /*using var context = ContextFactory.CreateDbContext();
+        using var context = ContextFactory.CreateDbContext();
         var todo = await context.Todos.FindAsync(listItem.Id);
         if (todo != null) {
             todo.IsTaskCompleted = !todo.IsTaskCompleted;
             await context.SaveChangesAsync();
-        }*/
+        }
     }
 
 
