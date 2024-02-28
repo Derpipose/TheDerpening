@@ -18,11 +18,11 @@ Welcome to your todo list
 
 @if (ToDos != null) {
     @foreach(var taskdo in ToDos) {
-        @if(!taskdo.IsCompleted && bool.Parse(config["toggle"] ?? "true")) {
+        @if(!taskdo.IsTaskCompleted && bool.Parse(config["toggle"] ?? "true")) {
         
             <div class="d-flex flex-row">
 
-                <input type="checkbox" @bind="taskdo.IsCompleted"/>
+                <input type="checkbox" @*@bindevent="@completeTask(taskdo)" *@  />
                 <p>@taskdo.Title</p>    
             </div>
         }
@@ -49,8 +49,17 @@ Welcome to your todo list
             context.Todos.Add(AddnewItem);
             await context.SaveChangesAsync();
             AddnewItem = new();
-
+            ToDos = await context.Todos.ToArrayAsync();
         }
+    }
+
+    private async Task completeTask(TodoListItem listItem) {
+        /*using var context = ContextFactory.CreateDbContext();
+        var todo = await context.Todos.FindAsync(listItem.Id);
+        if (todo != null) {
+            todo.IsTaskCompleted = !todo.IsTaskCompleted;
+            await context.SaveChangesAsync();
+        }*/
     }
 
 

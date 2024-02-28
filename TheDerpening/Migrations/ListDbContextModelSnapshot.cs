@@ -29,7 +29,7 @@ namespace TheDerpening.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("IsCompleted")
+                    b.Property<bool>("IsTaskCompleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Title")

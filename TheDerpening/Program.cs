@@ -10,9 +10,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+/*builder.Services.AddDbContextFactory<ListDbContext>((serviceProvider, options) => {
+    var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+    var connectionString = configuration["DefaultConnection"];
+    options.UseNpgsql(connectionString);
+});*/
 builder.Services.AddDbContextFactory<ListDbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("ListDb"))
-    ) ;
+    );
 
 var app = builder.Build();
 

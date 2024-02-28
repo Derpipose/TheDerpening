@@ -10,7 +10,7 @@ namespace TheDerpening.Data.Models
         [Required]
         [StringLength(90)]
         public string ?Title { get; set; }
-        public bool IsCompleted { get; set; }
+        public bool IsTaskCompleted { get; set; }
     }
 
     /*public class ApplicationDbContext : DbContext

@@ -17,7 +17,7 @@ namespace TheDerpening.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(90)", maxLength: 90, nullable: false),
-                    IsCompleted = table.Column<bool>(type: "bit", nullable: false)
+                    IsTaskCompleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
