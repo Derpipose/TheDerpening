@@ -60,6 +60,7 @@ Welcome to your todo list
         if (todo != null) {
             todo.IsTaskCompleted = !todo.IsTaskCompleted;
             await context.SaveChangesAsync();
+            ToDos = await context.Todos.ToArrayAsync();
         }
     }
 
