@@ -27,7 +27,7 @@ services:
     container_name: "thederpeningapiimage"
     build:
         context: ..
-        dockerfile: ./DerpeningAPI/Dockerfile
+        dockerfile: ./TheDerpeningAPI/Dockerfile
     ports:
         - "7568:8080"
 
