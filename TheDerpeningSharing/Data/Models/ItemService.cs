@@ -45,7 +45,7 @@ namespace TheDerpening.Data.Models
         public async Task<TodoListItem> Get(int id)
         {
             var itemtobefound = await _listDbContext.Todos.Where(T => T.Id == id).FirstOrDefaultAsync();
-            if(itemtobefound == null) { itemtobefound = new TodoListItem(); }
+            if (itemtobefound == null) { itemtobefound = new TodoListItem(); }
             return itemtobefound;
         }
 
