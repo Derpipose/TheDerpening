@@ -55,13 +55,6 @@ namespace TheDerpeningAPI.Controllers
             return listItem;
         }
 
-        [HttpGet("health")]
-        public IActionResult HealthCheck()
-        {
-            // Perform any necessary health checks here
-            // Return success response if service is healthy
-            return Ok();
-        }
 
     }
 }

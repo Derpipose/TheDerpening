@@ -53,7 +53,12 @@ namespace TheDerpening.Data.Models
         public async Task Update(TodoListItem obj)
         {
             var itemtobeupdated = await _listDbContext.Todos.Where(T => T.Id == obj.Id).FirstOrDefaultAsync();
-            itemtobeupdated = obj;
+            if (itemtobeupdated != null)
+            {
+                itemtobeupdated.IsTaskCompleted = obj.IsTaskCompleted;
+                itemtobeupdated.Title = obj.Title;
+                //_listDbContext.Entry(itemtobeupdated).State = EntityState.Modified;
+            }
             await _listDbContext.SaveChangesAsync();
 
         }

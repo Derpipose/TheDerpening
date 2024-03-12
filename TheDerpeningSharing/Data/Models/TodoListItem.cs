@@ -6,6 +6,9 @@ namespace TheDerpening.Data.Models
 {
     public partial class TodoListItem
     {
+        public TodoListItem() { 
+            IsTaskCompleted = false;
+        }
         public int Id { get; set; }
         [Required]
         [StringLength(90)]
