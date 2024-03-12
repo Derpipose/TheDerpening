@@ -19,7 +19,6 @@ jobs:
         run: |
           cd TheDerpening
           docker compose down --remove-orphans
-          docker network create -d bridge my-network
           docker compose up -d --build
 
       - name: Formatting Ensured
