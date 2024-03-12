@@ -38,13 +38,14 @@ namespace TheDerpening.Data.Models
         public async Task Delete(int id)
         {
             var itemtoberemoved = await _listDbContext.Todos.Where(T => T.Id == id).FirstOrDefaultAsync();
-            _listDbContext.Todos.Remove(itemtoberemoved);
+            if (itemtoberemoved != null) { _listDbContext.Todos.Remove(itemtoberemoved); }
             await _listDbContext.SaveChangesAsync();
         }
 
         public async Task<TodoListItem> Get(int id)
         {
             var itemtobefound = await _listDbContext.Todos.Where(T => T.Id == id).FirstOrDefaultAsync();
+            if(itemtobefound == null) { itemtobefound = new TodoListItem(); }
             return itemtobefound;
         }
 

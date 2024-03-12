@@ -1,18 +1,18 @@
 ﻿CREATE TABLE "Todos" (
-    "Id" int NOT NULL,
+    "Id" serial NOT NULL,
     "Title" varchar(90) NOT NULL,
-    "IsTaskCompleted" bit NOT NULL
+    "IsTaskCompleted" Boolean NOT NULL
 );
 
 CREATE TABLE "Players" (
-    "Id" int NOT NULL,
+    "Id" serial NOT NULL,
     "Name" varchar(60) NOT NULL,
     "Keyword" varchar(60) NOT NULL,
     PRIMARY KEY ("Id")
 );
 
 CREATE TABLE "Characters" (
-    "Id" int NOT NULL,
+    "Id" serial NOT NULL,
     "PlayerId" int NOT NULL,
     "CharacterName" varchar(90) NOT NULL,
     "Strength" int,

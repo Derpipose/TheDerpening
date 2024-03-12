@@ -38,13 +38,13 @@ Welcome to your todo list
     private List<TodoListItem>? ToDos{ get; set; }
 
 
-    public TodoListItem? AddnewItem = new();
+    public TodoListItem AddnewItem = new();
 
     protected override async Task OnInitializedAsync() {
 
 
         ToDos = await apiService.GetTasks();
-        AddnewItem = new();
+        AddnewItem = new TodoListItem();
 
     }
 
@@ -52,6 +52,8 @@ Welcome to your todo list
         if (AddnewItem is not null) {
             await apiService.AddItem(AddnewItem);
         }
+
+        ToDos = await apiService.GetTasks();
     }
 
     private async Task completeTask(TodoListItem listItem) {

@@ -7,7 +7,7 @@ using TheDerpening.Data;
 using TheDerpening.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-string uri = "http://localhost:7568";
+string uri = "http://thederpeningapiimage:8080";
 // Add services to the container.
 builder.Services.AddRazorPages();
 try
