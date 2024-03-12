@@ -1,6 +1,7 @@
 ﻿
 version: '3.8'
-
+volumes:
+  dbVolume:
 services:
   postgres:
     container_name: my_postgres_db
@@ -11,7 +12,7 @@ services:
       - POSTGRES_DB=mydatabase
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-      -  ./dbVolume:/var/lib/postgresql/data
+      -  dbVolume:/var/lib/postgresql/data
     ports:
       - "5432:5432"
   

@@ -1,5 +1,7 @@
-﻿namespace TheDerpeningSharing {
-    public class Class1 {
+﻿namespace TheDerpeningSharing
+{
+    public class Class1
+    {
 
     }
 }

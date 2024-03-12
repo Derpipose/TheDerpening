@@ -28,3 +28,7 @@ README.md
 !.git/config
 !.git/packed-refs
 !.git/refs/heads/**
+
+**/docker-compose.yml
+TheDerpening/dbVolume/
+TheDerpening/init.sql

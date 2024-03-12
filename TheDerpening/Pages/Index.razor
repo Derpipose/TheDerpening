@@ -1,6 +1,7 @@
 ﻿@page "/"
+@using TheDerpening.Data.Models;
 @inject IConfiguration config
-@inject IDbContextFactory<ListDbContext> ContextFactory
+@inject HttpClient client
 
 <PageTitle>To Do List</PageTitle>
 
@@ -34,19 +35,19 @@ Welcome to your todo list
 @code{
 
     private TodoListItem[]? ToDos{ get; set; }
+    
 
     public TodoListItem? AddnewItem = new();
 
     protected override async Task OnInitializedAsync() {
-        using var context = ContextFactory.CreateDbContext();
-        ToDos = await context.Todos.ToArrayAsync();
+        
+        ToDos = 
         AddnewItem = new();
 
     }
 
     private async Task HandleValidSubmit() {
         if (AddnewItem is not null) {
-            using var context = ContextFactory.CreateDbContext();
             context.Todos.Add(AddnewItem);
             await context.SaveChangesAsync();
             AddnewItem = new();
@@ -55,7 +56,6 @@ Welcome to your todo list
     }
 
     private async Task completeTask(TodoListItem listItem) {
-        using var context = ContextFactory.CreateDbContext();
         var todo = await context.Todos.FindAsync(listItem.Id);
         if (todo != null) {
             todo.IsTaskCompleted = !todo.IsTaskCompleted;

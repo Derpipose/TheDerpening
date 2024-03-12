@@ -1,5 +1,7 @@
-namespace TheDerpeningAPI {
-    public class WeatherForecast {
+﻿namespace TheDerpeningAPI
+{
+    public class WeatherForecast
+    {
         public DateOnly Date { get; set; }
 
         public int TemperatureC { get; set; }

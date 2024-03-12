@@ -1,0 +1,25 @@
+name: DerpeningProject
+run-name: Derp is derping
+on: [push, workflow_dispatch]
+
+
+
+jobs: 
+  Deployment:
+    runs-on: self-hosted
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 8.0.2
+
+      - name: Getting Production Ready
+        run: |
+          cd TheDerpening
+          docker compose down --remove-orphans
+          docker compose up -d --build
+
+      - name: Formatting Ensured
+        run: dotnet format --verify-no-changes --verbosity diagnostic

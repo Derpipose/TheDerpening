@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace TheDerpening.Data.Models
 {
@@ -9,7 +9,7 @@ namespace TheDerpening.Data.Models
         public int Id { get; set; }
         [Required]
         [StringLength(90)]
-        public string ?Title { get; set; }
+        public string? Title { get; set; }
         public bool IsTaskCompleted { get; set; }
 
     }
