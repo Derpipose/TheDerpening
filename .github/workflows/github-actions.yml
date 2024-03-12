@@ -22,4 +22,4 @@ jobs:
           docker compose up -d --build
 
       - name: Formatting Ensured
-        run: dotnet format --verify-no-changes --verbosity diagnostic
+        run: dotnet format --verify-no-changes --verbosity diagnostic 
