@@ -1,5 +1,9 @@
 ﻿
 version: '3.8'
+
+networks:
+  my-network:
+      driver: bridge
 volumes:
   dbVolume:
 services:
@@ -15,14 +19,6 @@ services:
       -  dbVolume:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-  
-  thederpeningimage:
-    container_name: "thederpeningimage"
-    build:
-        context: ..
-        dockerfile: ./TheDerpening/Dockerfile
-    ports:
-        - "7564:8080"
 
   thederpeningapiimage:
     container_name: "thederpeningapiimage"
@@ -31,6 +27,26 @@ services:
         dockerfile: ./TheDerpeningAPI/Dockerfile
     ports:
         - "7568:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7568/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - my-network
+  
+  thederpeningimage:
+    container_name: "thederpeningimage"
+    build:
+        context: ..
+        dockerfile: ./TheDerpening/Dockerfile
+    ports:
+        - "7564:8080"
+    networks:
+        - my-network
+
+
+
 
   
 

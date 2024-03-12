@@ -4,11 +4,30 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration;
 using TheDerpening.Data;
+using TheDerpening.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-
+string uri = "http://localhost:7568";
 // Add services to the container.
 builder.Services.AddRazorPages();
+try
+{
+    builder.Services.AddScoped<ApiService>(provider =>
+            {
+                HttpClient httpclient = new HttpClient { BaseAddress = new Uri(uri) };
+                return new ApiService(httpclient);
+            });
+}
+catch
+{
+    Thread.Sleep(40000);
+    builder.Services.AddScoped<ApiService>(provider =>
+    {
+        HttpClient httpclient = new HttpClient { BaseAddress = new Uri(uri) };
+        return new ApiService(httpclient);
+    });
+}
+
 builder.Services.AddServerSideBlazor();
 /*builder.Services.AddDbContextFactory<ListDbContext>((serviceProvider, options) => {
     var configuration = serviceProvider.GetRequiredService<IConfiguration>();

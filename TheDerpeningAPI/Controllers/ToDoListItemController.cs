@@ -42,17 +42,26 @@ namespace TheDerpeningAPI.Controllers
             return listItem;
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("/delete/{id}")]
         public async Task Delete(int id)
         {
             await _ToDoItems.Delete(id);
         }
 
-        [HttpPut()]
+        [HttpPut("/update")]
         public async Task<TodoListItem> Update(TodoListItem listItem)
         {
             await _ToDoItems.Update(listItem);
             return listItem;
         }
+
+        [HttpGet("health")]
+        public IActionResult HealthCheck()
+        {
+            // Perform any necessary health checks here
+            // Return success response if service is healthy
+            return Ok();
+        }
+
     }
 }

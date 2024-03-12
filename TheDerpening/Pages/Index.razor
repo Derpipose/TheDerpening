@@ -1,7 +1,8 @@
 ﻿@page "/"
 @using TheDerpening.Data.Models;
 @inject IConfiguration config
-@inject HttpClient client
+@using TheDerpening.Services;
+@inject ApiService apiService
 
 <PageTitle>To Do List</PageTitle>
 
@@ -34,34 +35,27 @@ Welcome to your todo list
 
 @code{
 
-    private TodoListItem[]? ToDos{ get; set; }
-    
+    private List<TodoListItem>? ToDos{ get; set; }
+
 
     public TodoListItem? AddnewItem = new();
 
     protected override async Task OnInitializedAsync() {
-        
-        ToDos = 
+
+
+        ToDos = await apiService.GetTasks();
         AddnewItem = new();
 
     }
 
     private async Task HandleValidSubmit() {
         if (AddnewItem is not null) {
-            context.Todos.Add(AddnewItem);
-            await context.SaveChangesAsync();
-            AddnewItem = new();
-            ToDos = await context.Todos.ToArrayAsync();
+            await apiService.AddItem(AddnewItem);
         }
     }
 
     private async Task completeTask(TodoListItem listItem) {
-        var todo = await context.Todos.FindAsync(listItem.Id);
-        if (todo != null) {
-            todo.IsTaskCompleted = !todo.IsTaskCompleted;
-            await context.SaveChangesAsync();
-            ToDos = await context.Todos.ToArrayAsync();
-        }
+        await apiService.Update(listItem);
     }
 
 
