@@ -57,7 +57,6 @@ namespace TheDerpening.Data.Models
             {
                 itemtobeupdated.IsTaskCompleted = obj.IsTaskCompleted;
                 itemtobeupdated.Title = obj.Title;
-                //_listDbContext.Entry(itemtobeupdated).State = EntityState.Modified;
             }
             await _listDbContext.SaveChangesAsync();
 
