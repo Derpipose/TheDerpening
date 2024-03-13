@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TheDerpening.Data;
 using TheDerpening.Data.Models;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHealthChecks();
 
 var connectionstring = builder.Configuration.GetConnectionString("ListDb");
 builder.Services.AddDbContext<ListDbContext>(options => options.UseNpgsql(connectionstring));
@@ -25,6 +28,15 @@ app.UseSwagger();
 app.UseSwaggerUI();
 /*}*/
 
+app.MapHealthChecks("/health", new HealthCheckOptions
+{
+    AllowCachingResponses = false,
+    ResultStatusCodes= {
+        [HealthStatus.Healthy] = StatusCodes.Status200OK,
+        [HealthStatus.Degraded] = StatusCodes.Status200OK,
+        [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
+    }
+});
 /*app.UseHttpsRedirection();
 */
 app.UseAuthorization();
