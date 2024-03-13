@@ -15,7 +15,7 @@ services:
     container_name: derp-blackbox
     restart: unless-stopped
     ports:
-      - 9115:9115
+      - 9120:9115
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./Docker/blackbox.yml:/etc/blackbox/blackbox.yml
@@ -28,7 +28,7 @@ services:
     hostname: prometheus
     restart: unless-stopped
     ports:
-      - 9090:9090
+      - 9097:9090
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./Docker/prometheus.yml:/etc/prometheus/prometheus.yml
@@ -60,8 +60,8 @@ services:
       - tempo:/tmp/tempo
     restart: unless-stopped
     ports:
-      - 3200:3200  # tempo
-      - 4007:4317  # otlp grpc
+      - 3207:3200  # tempo
+      - 4017:4317  # otlp grpc
     depends_on:
       - derp-otel-collector
 
