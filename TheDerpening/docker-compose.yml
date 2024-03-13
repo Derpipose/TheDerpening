@@ -47,7 +47,7 @@ services:
       - loki:/data/loki
     restart: unless-stopped
     ports:
-      - 3100:3100
+      - 3114:3100
 
   derp-tempo:
     # https://github.com/grafana/tempo/releases
