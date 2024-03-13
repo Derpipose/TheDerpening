@@ -39,7 +39,7 @@ builder.Logging.AddOpenTelemetry(options =>
         .AddConsoleExporter()
         .AddOtlpExporter(o =>
             {
-                o.Endpoint = new Uri("http://otel-collector:4317");
+                o.Endpoint = new Uri("http://derp-otel-collector:4317");
             });
 });
 

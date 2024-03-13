@@ -14,7 +14,7 @@ exporters:
     tls:
       insecure: true
   loki:
-    endpoint: http://loki:3100/loki/api/v1/push
+    endpoint: http://derp-loki:3100/loki/api/v1/push
     tls:
       insecure: true
 

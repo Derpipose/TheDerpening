@@ -9,10 +9,10 @@ volumes:
   grafana-data:
 
 services:
-  blackbox:
+  derp-blackbox:
     # https://github.com/prometheus/blackbox_exporter/releases
     image: prom/blackbox-exporter:v0.24.0
-    container_name: blackbox
+    container_name: derp-blackbox
     restart: unless-stopped
     ports:
       - 9115:9115
@@ -21,10 +21,10 @@ services:
       - ./Docker/blackbox.yml:/etc/blackbox/blackbox.yml
     command: --config.file=/etc/blackbox/blackbox.yml
     
-  prometheus:
+  derp-prometheus:
     # https://github.com/prometheus/prometheus/releases
     image: prom/prometheus:v2.50.1
-    container_name: prometheus
+    container_name: derp-prometheus
     hostname: prometheus
     restart: unless-stopped
     ports:
@@ -34,12 +34,12 @@ services:
       - ./Docker/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus:/prometheus
     depends_on:
-      - blackbox
+      - derp-blackbox
 
-  loki:
+  derp-loki:
     # https://github.com/grafana/loki/releases
     image: grafana/loki:2.9.5
-    container_name: loki
+    container_name: derp-loki
     command: -config.file=/etc/loki/local-config.yaml
     volumes:
       - /etc/localtime:/etc/localtime:ro      
@@ -49,10 +49,10 @@ services:
     ports:
       - 3100:3100
 
-  tempo:
+  derp-tempo:
     # https://github.com/grafana/tempo/releases
     image: grafana/tempo:2.4.0
-    container_name: tempo
+    container_name: derp-tempo
     command: [ "-config.file=/etc/tempo.yaml" ]
     volumes:
       - /etc/localtime:/etc/localtime:ro
@@ -63,11 +63,11 @@ services:
       - 3200:3200  # tempo
       - 4007:4317  # otlp grpc
     depends_on:
-      - otel-collector
+      - derp-otel-collector
 
-  grafana:
+  derp-grafana:
     image: grafana/grafana:9.4.7
-    container_name: grafana
+    container_name: derp-grafana
     environment:
       - GF_SECURITY_ADMIN_USER=derpipose
       - GF_SECURITY_ADMIN_PASSWORD=derp
@@ -81,13 +81,13 @@ services:
     ports:
       - 3001:3000
     depends_on:
-      - prometheus
-      - tempo
-      - loki    
+      - derp-prometheus
+      - derp-tempo
+      - derp-loki    
 
-  otel-collector:
+  derp-otel-collector:
     # https://github.com/open-telemetry/opentelemetry-collector-contrib/releases
-    container_name: otel
+    container_name: derp-otel
     hostname: otel
     image: otel/opentelemetry-collector-contrib:0.96.0
     command: ["--config=/etc/otel-collector-config.yaml"]
@@ -101,10 +101,10 @@ services:
       - "9200:55679"  # zpages
       - 13133:13133   # health check endpoint
 
-  rabbitmq:
+  derp-rabbitmq:
     # https://github.com/docker-library/rabbitmq
     image: rabbitmq:3.12-management-alpine
-    container_name: rabbitmq
+    container_name: derp-rabbitmq
     restart: unless-stopped
     ports:
       - 5672:5672
