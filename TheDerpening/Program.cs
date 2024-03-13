@@ -10,23 +10,14 @@ var builder = WebApplication.CreateBuilder(args);
 string uri = "http://thederpeningapiimage:8080";
 // Add services to the container.
 builder.Services.AddRazorPages();
-try
-{
-    builder.Services.AddScoped<ApiService>(provider =>
-            {
-                HttpClient httpclient = new HttpClient { BaseAddress = new Uri(uri) };
-                return new ApiService(httpclient);
-            });
-}
-catch
-{
-    Thread.Sleep(40000);
-    builder.Services.AddScoped<ApiService>(provider =>
-    {
-        HttpClient httpclient = new HttpClient { BaseAddress = new Uri(uri) };
-        return new ApiService(httpclient);
-    });
-}
+
+builder.Services.AddScoped<ApiService>(provider =>
+        {
+            HttpClient httpclient = new HttpClient { BaseAddress = new Uri(uri) };
+            return new ApiService(httpclient);
+        });
+
+
 
 builder.Services.AddServerSideBlazor();
 /*builder.Services.AddDbContextFactory<ListDbContext>((serviceProvider, options) => {

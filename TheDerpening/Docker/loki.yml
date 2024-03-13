@@ -32,6 +32,3 @@ query_scheduler:
 
 frontend:
   max_outstanding_per_tenant: 10000  
-
-# ruler:
-#   alertmanager_url: http://localhost:9093

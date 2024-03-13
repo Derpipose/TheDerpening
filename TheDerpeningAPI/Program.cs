@@ -3,6 +3,14 @@ using TheDerpening.Data;
 using TheDerpening.Data.Models;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Serilog;
+using Serilog.Sinks;
+using Serilog.Sinks.OpenTelemetry;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+using OpenTelemetry.Exporter;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +27,37 @@ builder.Services.AddDbContext<ListDbContext>(options => options.UseNpgsql(connec
 
 /*builder.Services.AddScoped<ListDbContext>();*/
 builder.Services.AddScoped<ItemService>();
+
+const string serviceName = "roll-dice";
+
+builder.Logging.AddOpenTelemetry(options =>
+{
+    options
+        .SetResourceBuilder(
+            ResourceBuilder.CreateDefault()
+                .AddService(serviceName))
+        .AddConsoleExporter()
+        .AddOtlpExporter(o =>
+            {
+                o.Endpoint = new Uri("http://otel-collector:4317");
+            });
+});
+
+
+builder.Services.AddOpenTelemetry()
+      .ConfigureResource(resource => resource.AddService(serviceName))
+      .WithTracing(tracing => tracing
+          .AddAspNetCoreInstrumentation()
+          .AddConsoleExporter())
+          
+      .WithMetrics(metrics => metrics
+          .AddAspNetCoreInstrumentation()
+          .AddConsoleExporter());
+        
+
+
+
+
 
 var app = builder.Build();
 

@@ -31,8 +31,6 @@ service:
     traces:
       receivers: [otlp]
       exporters: [otlp]
-      # exporters: [debug, otlp]
     logs:
       receivers: [otlp]
       exporters: [loki]
-      # exporters: [debug, loki]

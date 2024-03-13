@@ -26,6 +26,7 @@ namespace TheDerpeningAPI.Controllers
         [HttpGet()]
         public async Task<IEnumerable<TodoListItem>> Get()
         {
+            _logger.LogInformation("I did an item add");
             return await _ToDoItems.GetAll();
         }
 
@@ -55,7 +56,7 @@ namespace TheDerpeningAPI.Controllers
             return listItem;
         }
 
-        [HttpGet]
+        [HttpGet("/Healthcheckapi")]
         public IActionResult Check() {
 
             bool isHealthy = true; 
