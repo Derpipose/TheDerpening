@@ -55,6 +55,17 @@ namespace TheDerpeningAPI.Controllers
             return listItem;
         }
 
+        [HttpGet]
+        public IActionResult Check() {
+
+            bool isHealthy = true; 
+            if (isHealthy) {
+                return Ok("API is healthy");
+            } else {
+                return StatusCode(500, "API is unhealthy");
+            }
+        }
+
 
     }
 }

@@ -57,6 +57,7 @@ Welcome to your todo list
     }
 
     private async Task completeTask(TodoListItem listItem) {
+        listItem.IsTaskCompleted = !listItem.IsTaskCompleted;
         await apiService.Update(listItem);
     }
 

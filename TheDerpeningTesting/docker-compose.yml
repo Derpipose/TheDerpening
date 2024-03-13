@@ -24,23 +24,3 @@ services:
         dockerfile: ./TheDerpeningAPI/Dockerfile
     ports:
         - "7568:8080"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:7568/ToDoListItem/health"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-  
-  thederpeningimage:
-    container_name: "thederpeningimage"
-    build:
-        context: ..
-        dockerfile: ./TheDerpening/Dockerfile
-    ports:
-        - "7564:8080"
-
-
-
-
-  
-
-  

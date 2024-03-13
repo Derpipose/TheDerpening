@@ -2,8 +2,6 @@ name: DerpeningProject
 run-name: Derp is derping
 on: [push, workflow_dispatch]
 
-
-
 jobs: 
   Deployment:
     runs-on: self-hosted

@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheDerpeningAPI", "TheDerpe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheDerpeningSharing", "TheDerpeningSharing\TheDerpeningSharing.csproj", "{47DFA236-6AC1-4E81-8124-3AE74241B107}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheDerpeningTesting", "TheDerpeningTesting\TheDerpeningTesting.csproj", "{78ECAAEE-80A2-48E2-B903-196BDA026D1B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{47DFA236-6AC1-4E81-8124-3AE74241B107}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47DFA236-6AC1-4E81-8124-3AE74241B107}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47DFA236-6AC1-4E81-8124-3AE74241B107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78ECAAEE-80A2-48E2-B903-196BDA026D1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78ECAAEE-80A2-48E2-B903-196BDA026D1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78ECAAEE-80A2-48E2-B903-196BDA026D1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78ECAAEE-80A2-48E2-B903-196BDA026D1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
