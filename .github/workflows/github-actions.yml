@@ -46,4 +46,4 @@ jobs:
         uses: jdcargile/ms-teams-notification@v1.4
         with:
           github-token: ${{ github.token }}
-          webhook-uri: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          ms-teams-webhook-uri: ${{ secrets.TEAMS_WEBHOOK_URL }}
