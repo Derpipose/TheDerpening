@@ -48,3 +48,5 @@ jobs:
         with:
           github-token: ${{ github.token }}
           ms-teams-webhook-uri: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          notification-summary: Oh No! A derp went wrong!!!
+          notification-color: dc3545
