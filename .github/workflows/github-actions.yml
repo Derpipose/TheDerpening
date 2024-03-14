@@ -1,13 +1,16 @@
 name: DerpeningProject
-run-name: Derp is derping
-on: [push, workflow_dispatch]
 
-jobs: 
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
   Deployment:
     runs-on: self-hosted
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
+
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
@@ -16,16 +19,15 @@ jobs:
       - name: Set up unit and integrated Tests
         run: |
           cd TheTesting
-          docker compose up -d --build
+          docker-compose up -d --build
           sleep 5
-          docker compose exec -T derp-testing dotnet test
-    
-          
+          docker-compose exec -T derp-testing dotnet test
+      
       - name: Clean up Tests
         if: always()
         run: |
           cd TheTesting
-          docker compose down --remove-orphans --volumes
+          docker-compose down --remove-orphans --volumes
 
       - name: Check Warnings
         run: |
@@ -34,8 +36,14 @@ jobs:
       - name: Getting Production Ready
         run: |
           cd TheDerpening
-          docker compose down --remove-orphans
-          docker compose up -d --build
+          docker-compose down --remove-orphans
+          docker-compose up -d --build
 
       - name: Formatting Ensured
         run: dotnet format --verify-no-changes --verbosity diagnostic 
+
+      - name: Send MS Teams Notification
+        uses: dchourasia/ms-teams-notification@1.0
+        with:
+          github-token: ${{ github.token }}
+          webhook-uri: ${{ secrets.TEAMS_WEBHOOK_URL }}
