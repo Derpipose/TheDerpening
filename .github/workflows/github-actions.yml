@@ -15,7 +15,7 @@ jobs:
 
       - name: Set up Tests
         run: |
-          cd TheDerpeningTesting
+          cd TheTesting
           docker compose up -d --build
           sleep 5
           docker compose exec -T  -e DOTNET_CLI_HOME="/tmp/dotnet" --user $(id -u):$(id -g) derp-testing dotnet test
@@ -24,7 +24,7 @@ jobs:
       - name: Clean up Tests
         if: always()
         run: |
-          cd TheDerpeningTesting
+          cd TheTesting
           docker compose down --remove-orphans --volumes
 
       - name: Getting Production Ready
