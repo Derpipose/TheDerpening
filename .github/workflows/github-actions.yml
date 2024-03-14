@@ -18,7 +18,7 @@ jobs:
           cd TheTesting
           docker compose up -d --build
           sleep 5
-          docker compose exec -T  -e DOTNET_CLI_HOME="/tmp/dotnet" --user $(id -u):$(id -g) derp-testing dotnet test
+          docker compose exec -T derp-testing dotnet test
     
           
       - name: Clean up Tests
