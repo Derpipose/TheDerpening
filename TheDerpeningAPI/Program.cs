@@ -1,16 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
-using TheDerpening.Data;
-using TheDerpening.Data.Models;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+﻿using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Serilog;
-using Serilog.Sinks;
-using Serilog.Sinks.OpenTelemetry;
+using OpenTelemetry.Exporter;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
-using OpenTelemetry.Exporter;
+using Serilog;
+using Serilog.Sinks;
+using Serilog.Sinks.OpenTelemetry;
+using TheDerpening.Data;
+using TheDerpening.Data.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,11 +49,11 @@ builder.Services.AddOpenTelemetry()
       .WithTracing(tracing => tracing
           .AddAspNetCoreInstrumentation()
           .AddConsoleExporter())
-          
+
       .WithMetrics(metrics => metrics
           .AddAspNetCoreInstrumentation()
           .AddConsoleExporter());
-        
+
 
 
 
@@ -70,7 +70,7 @@ app.UseSwaggerUI();
 app.MapHealthChecks("/health", new HealthCheckOptions
 {
     AllowCachingResponses = false,
-    ResultStatusCodes= {
+    ResultStatusCodes = {
         [HealthStatus.Healthy] = StatusCodes.Status200OK,
         [HealthStatus.Degraded] = StatusCodes.Status200OK,
         [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable

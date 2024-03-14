@@ -57,12 +57,16 @@ namespace TheDerpeningAPI.Controllers
         }
 
         [HttpGet("/Healthcheckapi")]
-        public IActionResult Check() {
+        public IActionResult Check()
+        {
 
-            bool isHealthy = true; 
-            if (isHealthy) {
+            bool isHealthy = true;
+            if (isHealthy)
+            {
                 return Ok("API is healthy");
-            } else {
+            }
+            else
+            {
                 return StatusCode(500, "API is unhealthy");
             }
         }

@@ -3,14 +3,14 @@ using TheDerpening.Data.Models;
 
 namespace TheDerpeningTesting
 {
-    
+
 
     public class UnitTests
     {
         [SetUp]
         public void Setup()
         {
-            
+
         }
 
         [Test]

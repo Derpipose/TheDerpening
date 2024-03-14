@@ -8,7 +8,7 @@ namespace TheDerpeningTesting
     public class IntegrationTests
     {
         ItemService service;
-        
+
         [SetUp]
         public void Setup()
         {
@@ -33,14 +33,15 @@ namespace TheDerpeningTesting
             Assert.Pass();
         }
 
-        [Test] public async Task Test2Async()
+        [Test]
+        public async Task Test2Async()
         {
-            TodoListItem firstitem = new TodoListItem { Title = "DERP"};
-            List<TodoListItem> list = new List<TodoListItem>(); 
+            TodoListItem firstitem = new TodoListItem { Title = "DERP" };
+            List<TodoListItem> list = new List<TodoListItem>();
             await service.Add(firstitem);
             list = (await service.GetAll()).ToList();
-            Assert.AreEqual(1, list.Count);
-            Assert.AreEqual(1, list[0].Id);
+            Assert.That(list.Count, Is.EqualTo(1));
+            Assert.That(list[0].Id, Is.EqualTo(1));
 
         }
     }
