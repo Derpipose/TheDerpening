@@ -15,7 +15,7 @@ jobs:
 
       - name: Set up Tests
         run: |
-          cd TheDerpeningTesting
+          cd .\TheDerpeningTesting
           docker compose up -d --build
           sleep 5
           docker compose exec -T  -e DOTNET_CLI_HOME="/tmp/dotnet" --user $(id -u):$(id -g) derp-testing dotnet test
