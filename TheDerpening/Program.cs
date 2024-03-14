@@ -29,7 +29,7 @@ builder.Services.AddServerSideBlazor();
 // builder.Services.
 
 var app = builder.Build();
-
+builder.Add();sfdssdbmhgdbfhvfb
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
