@@ -13,6 +13,20 @@ jobs:
         with:
           dotnet-version: 8.0.102
 
+      - name: Set up Tests
+        run: |
+          cd TheDerpeningTesting
+          docker compose up -d --build
+          sleep 5
+          docker compose exec -T  -e DOTNET_CLI_HOME="/tmp/dotnet" --user $(id -u):$(id -g) derp-testing dotnet test
+    
+          
+      - name: Clean up Tests
+        if: always()
+        run: |
+          cd TheDerpeningTesting
+          docker compose down --remove-orphans --volumes
+
       - name: Getting Production Ready
         run: |
           cd TheDerpening

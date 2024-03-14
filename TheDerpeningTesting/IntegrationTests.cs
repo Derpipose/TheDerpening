@@ -1,12 +1,28 @@
-﻿using TheDerpening.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using TheDerpening.Data;
+using TheDerpening.Data.Models;
 
 namespace TheDerpeningTesting
 {
     public class IntegrationTests
     {
+        ItemService service;
+        
         [SetUp]
         public void Setup()
         {
+
+            string connection = "host=test-my_postgres_db:5432;Database=mydatabase;Username=myusername;Password=mypassword;";
+            var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+            var ItemLogger = loggerFactory.CreateLogger<ItemService>();
+
+            DbContextOptions<ListDbContext> options = new DbContextOptionsBuilder<ListDbContext>()
+            .UseNpgsql(connection)
+            .Options;
+
+            ListDbContext dbContext = new ListDbContext(options);
+            service = new(ItemLogger, dbContext);
 
         }
 
@@ -17,8 +33,14 @@ namespace TheDerpeningTesting
             Assert.Pass();
         }
 
-        [Test] public void Test2()
+        [Test] public async Task Test2Async()
         {
+            TodoListItem firstitem = new TodoListItem { Title = "DERP"};
+            List<TodoListItem> list = new List<TodoListItem>(); 
+            await service.Add(firstitem);
+            list = (await service.GetAll()).ToList();
+            Assert.AreEqual(1, list.Count);
+            Assert.AreEqual(1, list[0].Id);
 
         }
     }

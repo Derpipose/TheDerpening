@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TheDerpeningAPI\TheDerpeningAPI.csproj" />
     <ProjectReference Include="..\TheDerpeningSharing\TheDerpeningSharing.csproj" />
   </ItemGroup>
 
