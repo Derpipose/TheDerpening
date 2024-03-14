@@ -1,5 +1,5 @@
 name: DerpeningProject
-
+run-name: Derp is derping
 on:
   push:
   workflow_dispatch:
@@ -43,7 +43,7 @@ jobs:
         run: dotnet format --verify-no-changes --verbosity diagnostic 
 
       - name: Send MS Teams Notification
-        uses: dchourasia/ms-teams-notification@1.0
+        uses: jdcargile/ms-teams-notification@v1.4
         with:
           github-token: ${{ github.token }}
           webhook-uri: ${{ secrets.TEAMS_WEBHOOK_URL }}
