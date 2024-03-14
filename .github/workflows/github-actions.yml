@@ -15,9 +15,7 @@ jobs:
 
       - name: Set up Tests
         run: |
-          ls
           cd TheDerpeningTesting
-          console.WriteLine("I have made it to the docker");
           docker compose up -d --build
           sleep 5
           docker compose exec -T  -e DOTNET_CLI_HOME="/tmp/dotnet" --user $(id -u):$(id -g) derp-testing dotnet test
