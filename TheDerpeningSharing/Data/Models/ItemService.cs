@@ -1,4 +1,5 @@
 ﻿
+using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -6,7 +7,6 @@ namespace TheDerpening.Data.Models
 {
     public class ItemService
     {
-
         private readonly ILogger<ItemService> _logger;
         private ListDbContext _listDbContext;
         public ItemService(ILogger<ItemService> logger, ListDbContext listDbContext)
@@ -18,20 +18,24 @@ namespace TheDerpening.Data.Models
 
         public async Task<IEnumerable<TodoListItem>> GetAll()
         {
+            using var activity = DerpingMonitor.source.StartActivity("Getting all derp things");
+            activity?.SetTag("DerpingAttempt", 1);
+            DerpingMonitor.countAdd.Add(1);
             var mylist = await _listDbContext.Todos.ToListAsync();
             List<TodoListItem> list = new List<TodoListItem>();
             list = mylist;
-
+            activity?.Stop();
             return list;
+
         }
 
         public async Task Add(TodoListItem obj)
         {
-
+            using var activity = DerpingMonitor.source.StartActivity("Getting a derp thing");
+            activity?.SetTag("DerpAdding", 2);
             _listDbContext.Todos.Add(obj);
             await _listDbContext.SaveChangesAsync();
-            // save to context
-
+            activity?.Stop();
 
         }
 

@@ -101,6 +101,16 @@ services:
       - "9202:55679"  # zpages
       - 13135:13133   # health check endpoint
 
+  derp-zipkin:
+    container_name: derp-zipkin
+    image: openzipkin/zipkin:2.12.9
+    restart: unless-stopped
+    environment:
+      - STORAGE_TYPE=mem
+    mem_limit: 512m
+    ports:
+      - 9481:9411
+
   derp-rabbitmq:
     # https://github.com/docker-library/rabbitmq
     image: rabbitmq:3.12-management-alpine
@@ -113,9 +123,9 @@ services:
       # https://devops.stackexchange.com/questions/12092/docker-compose-healthcheck-for-rabbitmq?newreg=614274132fbc4f92a92ba80f6d758a76
       # https://www.rabbitmq.com/monitoring.html#health-checks
       test: [ "CMD", "rabbitmqctl", "status"]
-      interval: 5s
+      interval: 8s
       timeout: 20s
-      retries: 5
+      retries: 6
 
   postgres:
     container_name: my_postgres_db
@@ -151,7 +161,7 @@ services:
     ports:
         - "7564:8080"
 
-  
+
 
 
 

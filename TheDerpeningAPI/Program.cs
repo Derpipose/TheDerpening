@@ -28,7 +28,7 @@ builder.Services.AddDbContext<ListDbContext>(options => options.UseNpgsql(connec
 /*builder.Services.AddScoped<ListDbContext>();*/
 builder.Services.AddScoped<ItemService>();
 
-const string serviceName = "roll-dice";
+const string serviceName = "Derping";
 
 builder.Logging.AddOpenTelemetry(options =>
 {
@@ -48,11 +48,21 @@ builder.Services.AddOpenTelemetry()
       .ConfigureResource(resource => resource.AddService(serviceName))
       .WithTracing(tracing => tracing
           .AddAspNetCoreInstrumentation()
-          .AddConsoleExporter())
+          .AddConsoleExporter()
+          .AddSource(DerpingMonitor.source.Name)
+          .AddOtlpExporter(o =>
+          {
+              o.Endpoint = new Uri("http://derp-otel-collector:4317");
+          }))
 
       .WithMetrics(metrics => metrics
           .AddAspNetCoreInstrumentation()
-          .AddConsoleExporter());
+          .AddMeter("derpmetrics")
+          .AddConsoleExporter()
+          .AddOtlpExporter(o =>
+          {
+              o.Endpoint = new Uri("http://derp-otel-collector:4317");
+          }));
 
 
 
