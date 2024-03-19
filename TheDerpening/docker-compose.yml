@@ -79,7 +79,7 @@ services:
     restart: unless-stopped
     user: root
     ports:
-      - 3001:3000
+      - 3051:3000
     depends_on:
       - derp-prometheus
       - derp-tempo
