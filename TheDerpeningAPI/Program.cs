@@ -54,7 +54,6 @@ builder.Services.AddOpenTelemetry()
           {
               o.Endpoint = new Uri("http://derp-otel-collector:4317");
           }))
-
       .WithMetrics(metrics => metrics
           .AddAspNetCoreInstrumentation()
           .AddMeter("derpmetrics")
