@@ -18,7 +18,7 @@ namespace TheDerpening.Data.Models
             LogStartupMessage(logger, "fun");
 
         }
-        
+
         [LoggerMessage(Level = LogLevel.Information, Message = "Hello World! Logging is {Description}.")]
         static partial void LogStartupMessage(ILogger logger, string description);
 
@@ -58,7 +58,7 @@ namespace TheDerpening.Data.Models
 
         public async Task Add(TodoListItem obj)
         {
-            if(obj.Title != null)
+            if (obj.Title != null)
             {
                 using var activity = DerpingMonitor.source.StartActivity("Getting a derp thing");
                 activity?.SetTag("DerpAdding", 2);
