@@ -85,7 +85,7 @@ app.MapHealthChecks("/health", new HealthCheckOptions
     }
 });
 
-app.MapGet("/api/makeBigger", async () =>
+app.MapGet("/api/makeBigger",  () =>
 {
     DerpingMonitor.MyCountToTrack += 2;
 });
