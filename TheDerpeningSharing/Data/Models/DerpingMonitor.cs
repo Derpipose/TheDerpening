@@ -5,7 +5,7 @@ namespace TheDerpening.Data
 {
     public static class DerpingMonitor
     {
-
+        public static int MyCountToTrack { get; set; } = 2;
         public static Meter meter = new("derpmetrics");
         public static string DerpString = "I am a derp trace";
         public static ActivitySource source = new ActivitySource(DerpString, "1.0.0");

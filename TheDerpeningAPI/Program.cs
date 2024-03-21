@@ -84,6 +84,12 @@ app.MapHealthChecks("/health", new HealthCheckOptions
         [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
     }
 });
+
+app.MapGet("/api/makeBigger", async() =>
+{
+    DerpingMonitor.MyCountToTrack += 2;
+})
+
 /*app.UseHttpsRedirection();
 */
 app.UseAuthorization();
