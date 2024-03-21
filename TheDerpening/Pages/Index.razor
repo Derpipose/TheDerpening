@@ -51,7 +51,7 @@ Welcome to your todo list
     private async Task HandleValidSubmit() {
         if (AddnewItem is not null) {
             await apiService.AddItem(AddnewItem);
-        }
+        } 
 
         ToDos = await apiService.GetTasks();
     }

@@ -19,3 +19,7 @@ scrape_configs:
     static_configs:
     - targets: ['derp-otel-collector:8889']
     - targets: ['derp-otel-collector:8888']
+  - job_name: 'Metrics'
+    scrape_interval: 10s
+    static_configs:
+    - targets: ['derp-zipkin:9411']

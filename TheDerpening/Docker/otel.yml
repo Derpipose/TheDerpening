@@ -19,6 +19,8 @@ exporters:
       insecure: true
   zipkin:
     endpoint: http://derp-zipkin:9411/api/v2/spans
+    tls:
+      insecure: true
 
 extensions:
   zpages:

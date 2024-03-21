@@ -20,13 +20,7 @@ builder.Services.AddScoped<ApiService>(provider =>
 
 
 builder.Services.AddServerSideBlazor();
-/*builder.Services.AddDbContextFactory<ListDbContext>((serviceProvider, options) => {
-    var configuration = serviceProvider.GetRequiredService<IConfiguration>();
-    var connectionString = configuration["DefaultConnection"];
-    options.UseNpgsql(connectionString);
-});*/
 
-// builder.Services.
 
 var app = builder.Build();
 
@@ -34,7 +28,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

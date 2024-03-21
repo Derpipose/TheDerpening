@@ -6,11 +6,9 @@ using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
-using Serilog;
-using Serilog.Sinks;
-using Serilog.Sinks.OpenTelemetry;
 using TheDerpening.Data;
 using TheDerpening.Data.Models;
+using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +23,7 @@ builder.Services.AddHealthChecks();
 var connectionstring = builder.Configuration.GetConnectionString("ListDb");
 builder.Services.AddDbContext<ListDbContext>(options => options.UseNpgsql(connectionstring));
 
-/*builder.Services.AddScoped<ListDbContext>();*/
+
 builder.Services.AddScoped<ItemService>();
 
 const string serviceName = "Derping";
@@ -44,12 +42,13 @@ builder.Logging.AddOpenTelemetry(options =>
 });
 
 
+
 builder.Services.AddOpenTelemetry()
       .ConfigureResource(resource => resource.AddService(serviceName))
       .WithTracing(tracing => tracing
           .AddAspNetCoreInstrumentation()
           .AddConsoleExporter()
-          .AddSource(DerpingMonitor.source.Name)
+          .AddSource(DerpingMonitor.DerpString)
           .AddOtlpExporter(o =>
           {
               o.Endpoint = new Uri("http://derp-otel-collector:4317");

@@ -161,7 +161,17 @@ services:
     ports:
         - "7564:8080"
 
+  proxy: 
+    container_name: derp-proxy
+    image: nginx
+    ports:
+      - 7563:80
+    volumes: 
+      - ./nginx-default.conf:/etc/nginx/conf.d/default.conf
 
+
+  
+  
 
 
 
