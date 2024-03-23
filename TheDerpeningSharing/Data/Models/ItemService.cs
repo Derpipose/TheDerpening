@@ -51,6 +51,9 @@ namespace TheDerpening.Data.Models
             list = mylist;
             activity?.Stop();
             LogFunctionMessage(_logger, "gotted");
+            var observableUpDownCounter = DerpingMonitor.observableUpDownCounter;
+            var stringing = observableUpDownCounter.ToString();
+            DerpingMonitor.TaskCounter = Int32.TryParse(stringing, out var parsedValue) ? parsedValue : 0;
 
             return list;
 
@@ -66,6 +69,7 @@ namespace TheDerpening.Data.Models
                 await _listDbContext.SaveChangesAsync();
                 activity?.Stop();
                 BlepAlert(_logger, "blep :P");
+                DerpingMonitor.upDownCounter.Add(1);
             }
             else
             {
@@ -87,6 +91,7 @@ namespace TheDerpening.Data.Models
             }
             LogFunctionMessage(_logger, "deleted");
             await _listDbContext.SaveChangesAsync();
+            DerpingMonitor.upDownCounter.Add(-1);
         }
 
         public async Task<TodoListItem> Get(int id)
