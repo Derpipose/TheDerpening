@@ -16,7 +16,7 @@ namespace TheDerpening.Data
         public static ObservableCounter<int> observableCounter = meter.CreateObservableCounter<int>("apiviews", () => DerpCounter, unit: "views", "Api views?");
         public static ObservableUpDownCounter<int> observableUpDownCounter = meter.CreateObservableUpDownCounter<int>("FunPageViews", () => FunPageViews, unit: "A different page view", "A page view");
         public static ObservableGauge<int> observableGauge = meter.CreateObservableGauge<int>("TaskHistory", () => TaskCounter, unit: "tasks", description: "History of tasks");
-
+        public static Histogram<int> histogram = meter.CreateHistogram<int>("HistoryDerping", unit: "tasks", "A histogram of things");
 
     }
 }

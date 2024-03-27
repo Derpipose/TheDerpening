@@ -70,6 +70,8 @@ namespace TheDerpening.Data.Models
                 activity?.Stop();
                 BlepAlert(_logger, "blep :P");
                 DerpingMonitor.upDownCounter.Add(1);
+                int anint = _listDbContext.Todos.Count();
+                DerpingMonitor.histogram.Record(anint);
             }
             else
             {
@@ -92,6 +94,9 @@ namespace TheDerpening.Data.Models
             LogFunctionMessage(_logger, "deleted");
             await _listDbContext.SaveChangesAsync();
             DerpingMonitor.upDownCounter.Add(-1);
+            
+            int anint = _listDbContext.Todos.Count();
+            DerpingMonitor.histogram.Record(anint);
         }
 
         public async Task<TodoListItem> Get(int id)

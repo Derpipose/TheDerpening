@@ -57,17 +57,18 @@ builder.Services.AddOpenTelemetry()
           .AddAspNetCoreInstrumentation()
           .AddMeter("derpmetrics")
           .AddConsoleExporter()
+          .AddPrometheusExporter()
           .AddOtlpExporter(o =>
           {
               o.Endpoint = new Uri("http://derp-otel-collector:4317");
           }));
 
 
-
-
-
-
 var app = builder.Build();
+
+
+app.UseOpenTelemetryPrometheusScrapingEndpoint();
+
 
 // Configure the HTTP request pipeline.
 /*if (app.Environment.IsDevelopment()) {*/
