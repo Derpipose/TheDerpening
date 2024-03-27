@@ -94,7 +94,7 @@ namespace TheDerpening.Data.Models
             LogFunctionMessage(_logger, "deleted");
             await _listDbContext.SaveChangesAsync();
             DerpingMonitor.upDownCounter.Add(-1);
-            
+
             int anint = _listDbContext.Todos.Count();
             DerpingMonitor.histogram.Record(anint);
         }
