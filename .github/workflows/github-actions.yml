@@ -33,14 +33,14 @@ jobs:
         run: |
           dotnet build --warnaserror
 
+      - name: Formatting Ensured
+        run: dotnet format --verify-no-changes --verbosity diagnostic 
+
       - name: Getting Production Ready
         run: |
           cd TheDerpening
           docker-compose down --remove-orphans
           docker-compose up -d --build
-
-      - name: Formatting Ensured
-        run: dotnet format --verify-no-changes --verbosity diagnostic 
 
       - name: Send MS Teams Notification
         if: ${{ failure() }}

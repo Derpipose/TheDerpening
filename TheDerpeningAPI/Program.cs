@@ -94,7 +94,7 @@ app.MapGet("/api/makeBigger", () =>
 
 app.MapGet("/api/funpage", () =>
 {
-    DerpingMonitor.DerpCounter += 1;
+    DerpingMonitor.FunPageViews += 1;
 });
 
 /*app.UseHttpsRedirection();
