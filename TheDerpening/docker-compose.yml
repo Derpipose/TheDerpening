@@ -172,9 +172,9 @@ services:
     depends_on:
       - derp-grafana
 
-  swag:
+  derp-swag:
     image: lscr.io/linuxserver/swag
-    container_name: swag
+    container_name: derp-swag
     cap_add:
       - NET_ADMIN
     environment:
