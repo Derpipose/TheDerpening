@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: riley
+  name: thederpening-service
+spec:
+  type: ClusterIP
+  selector:
+    app: thederpening
+  ports:
+    - port: 80
+      targetPort: 8080

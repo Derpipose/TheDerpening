@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: riley
+  name: thederpening-deployment
+  labels:
+    app: thederpening
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: thederpening
+  template:
+    metadata:
+      labels:
+        app: thederpening
+    spec:
+      containers:
+      - name: thederpening
+        image: 144.17.92.12:5000/riley/thederpening:1
+        ports:
+        - containerPort: 8080
