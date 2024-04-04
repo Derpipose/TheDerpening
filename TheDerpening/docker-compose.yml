@@ -190,8 +190,8 @@ services:
       # - EMAIL=<e-mail> #optional
       # - ONLY_SUBDOMAINS=false #optional
       # - EXTRA_DOMAINS=<extradomains> #optional
-      - STAGING=false #for first time running
-      # - STAGING=true #For every other time running
+      # - STAGING=false #for first time running
+      - STAGING=true #For every other time running
     volumes:
       - swag-data:/config
       - ./nginx-default.conf:/config/nginx/site-configs/default.conf
