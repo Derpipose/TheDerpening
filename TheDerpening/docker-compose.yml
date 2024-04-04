@@ -182,14 +182,8 @@ services:
       - PGID=1000
       - TZ=America/Denver
       - URL=derpserver.duckdns.org
-      # - SUBDOMAINS=www,
       - VALIDATION=duckdns
-      # - CERTPROVIDER= #optional
-      # - DNSPLUGIN=cloudflare #optional
       - DUCKDNSTOKEN=def7af0f-e894-4562-9c47-af27eedee306
-      # - EMAIL=<e-mail> #optional
-      # - ONLY_SUBDOMAINS=false #optional
-      # - EXTRA_DOMAINS=<extradomains> #optional
       # - STAGING=false #for first time running
       - STAGING=true #For every other time running
     volumes:

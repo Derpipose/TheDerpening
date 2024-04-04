@@ -41,6 +41,14 @@ jobs:
           cd TheDerpening
           docker-compose down --remove-orphans
           docker-compose up -d --build
+      
+      - name: Kube
+        run: |
+          docker build -t 144.17.92.12:5000/riley/blazor-web:1
+          docker push 144.17.92.12:5000/riley/blazor-web:1
+          cd thederpening
+          kubectl -n riley create configmap blazor-web-postgres-init --from-file=init.sql
+          kubectl apply -f kube/
 
       - name: Send MS Teams Notification
         if: ${{ failure() }}
@@ -50,3 +58,4 @@ jobs:
           ms-teams-webhook-uri: ${{ secrets.TEAMS_WEBHOOK_URL }}
           notification-summary: Oh No! A derp went wrong!!!
           notification-color: dc3545
+        
