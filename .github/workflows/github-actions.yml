@@ -15,6 +15,16 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 8.0.102
+          
+      - name: Kube
+        run: |
+          cd TheDerpening
+          docker build -t 144.17.92.12:5000/riley/thederpening:1
+          docker push 144.17.92.12:5000/riley/thederpening:1
+          cd ..
+          kubectl apply -f kube/
+      #     kubectl -n riley create configmap blazor-web-postgres-init --from-file=init.sql
+
 
       - name: Set up unit and integrated Tests
         run: |
@@ -42,14 +52,6 @@ jobs:
           docker-compose down --remove-orphans
           docker-compose up -d --build
       
-      - name: Kube
-        run: |
-          cd thederpening
-          docker build -t 144.17.92.12:5000/riley/thederpening:1
-          docker push 144.17.92.12:5000/riley/thederpening:1
-          cd ..
-          kubectl apply -f kube/
-      #     kubectl -n riley create configmap blazor-web-postgres-init --from-file=init.sql
 
       - name: Send MS Teams Notification
         if: ${{ failure() }}
