@@ -20,3 +20,6 @@ spec:
         image: 144.17.92.12:5000/riley/thederpening:1
         ports:
         - containerPort: 8080
+        env:
+        - name: MYDATABASECONNECTIONSTRING
+          value: Server=thederpening-db-service;password=riley-password;user id=riley-user;database=rileydb;

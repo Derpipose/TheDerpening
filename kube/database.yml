@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   namespace: riley
-  name: blazor-web-db-pvc
+  name: thederpening-db-pvc
 spec:
   accessModes:
     - ReadWriteOnce
@@ -14,21 +14,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: riley
-  name: blazor-web-db-deployment
+  name: thederpening-db-deployment
   labels:
-    app: blazor-web-db
+    app: thederpening-db
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: blazor-web-db
+      app: thederpening-db
   template:
     metadata:
       labels:
-        app: blazor-web-db
+        app: thederpening-db
     spec:
       containers:
-      - name: blazor-web-db
+      - name: thederpening-db
         image: postgres
         ports:
         - containerPort: 5432
@@ -56,11 +56,11 @@ apiVersion: v1
 kind: Service
 metadata:
   namespace: riley
-  name: blazor-web-db-service
+  name: thederpening-db-service
 spec:
   type: ClusterIP
   selector:
-    app: blazor-web-db
+    app: thederpening-db
   ports:
     - port: 5432
       targetPort: 5432
