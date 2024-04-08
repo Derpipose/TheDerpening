@@ -22,4 +22,4 @@ spec:
         - containerPort: 8080
         env:
         - name: ListDb
-          value: Server=thederpeningapi-db-service;password=riley-password;user id=riley-user;database=rileydb;
+          value: Server=thederpening-db-service;password=riley-password;user id=riley-user;database=rileydb;
