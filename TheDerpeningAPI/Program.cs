@@ -20,7 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
 
-var connectionstring = builder.Configuration.GetConnectionString("ListDb");
+var connectionstring = builder.Configuration["ListDb"];
 builder.Services.AddDbContext<ListDbContext>(options => options.UseNpgsql(connectionstring));
 
 
