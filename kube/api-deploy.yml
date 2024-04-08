@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: thederpeningapi
-        image: 144.17.92.12:5000/riley/thederpeningapi:1
+        image: 144.17.92.12:5000/riley/thederpeningapi:2
         ports:
         - containerPort: 8080
         env:
