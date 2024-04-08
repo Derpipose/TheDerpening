@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: riley
+  name: thederpeningapi-deployment
+  labels:
+    app: thederpeningapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: thederpeningapi
+  template:
+    metadata:
+      labels:
+        app: thederpeningapi
+    spec:
+      containers:
+      - name: thederpeningapi
+        image: 144.17.92.12:5000/riley/thederpeningapi:1
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MYDATABASECONNECTIONSTRING
+          value: Server=thederpeningapi-db-service;password=riley-password;user id=riley-user;database=rileydb;

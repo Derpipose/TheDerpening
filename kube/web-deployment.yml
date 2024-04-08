@@ -17,9 +17,11 @@ spec:
     spec:
       containers:
       - name: thederpening
-        image: 144.17.92.12:5000/riley/thederpening:1
+        image: 144.17.92.12:5000/riley/thederpening:2
         ports:
         - containerPort: 8080
         env:
+        - name: apiaccess
+          value: http://thederpeningapi-service:80
         - name: MYDATABASECONNECTIONSTRING
           value: Server=thederpening-db-service;password=riley-password;user id=riley-user;database=rileydb;

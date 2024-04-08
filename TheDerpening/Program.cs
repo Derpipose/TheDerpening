@@ -7,7 +7,8 @@ using TheDerpening.Data;
 using TheDerpening.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-string uri = "http://thederpeningapiimage:8080";
+// string uri = "http://thederpeningapiimage:8080";
+string uri = Environment.GetEnvironmentVariable("apiaccess");
 // Add services to the container.
 builder.Services.AddRazorPages();
 

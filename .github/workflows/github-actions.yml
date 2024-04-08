@@ -18,8 +18,10 @@ jobs:
           
       - name: Kube
         run: |
-          docker build -t 144.17.92.12:5000/riley/thederpening:1 -f TheDerpening/Dockerfile .
-          docker push 144.17.92.12:5000/riley/thederpening:1
+          docker build -t 144.17.92.12:5000/riley/thederpening:2 -f TheDerpening/Dockerfile .
+          docker push 144.17.92.12:5000/riley/thederpening:2
+          docker build -t 144.17.92.12:5000/riley/thederpeningapi:1 -f TheDerpeningAPI/Dockerfile .
+          docker push 144.17.92.12:5000/riley/thederpeningapi:1
           kubectl apply -f kube/
       #     kubectl -n riley create configmap blazor-web-postgres-init --from-file=init.sql
 
