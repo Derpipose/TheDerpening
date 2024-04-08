@@ -47,7 +47,7 @@ builder.Services.AddOpenTelemetry()
       .ConfigureResource(resource => resource.AddService(serviceName))
       .WithTracing(tracing => tracing
           .AddAspNetCoreInstrumentation()
-          .AddConsoleExporter()
+          //   .AddConsoleExporter()
           .AddSource(DerpingMonitor.DerpString)
           .AddOtlpExporter(o =>
           {
@@ -56,7 +56,7 @@ builder.Services.AddOpenTelemetry()
       .WithMetrics(metrics => metrics
           .AddAspNetCoreInstrumentation()
           .AddMeter("derpmetrics")
-          .AddConsoleExporter()
+          //   .AddConsoleExporter()
           .AddPrometheusExporter()
           .AddOtlpExporter(o =>
           {
