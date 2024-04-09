@@ -22,8 +22,13 @@ jobs:
           docker push 144.17.92.12:5000/riley/thederpening:2
           docker build -t 144.17.92.12:5000/riley/thederpeningapi:2 -f TheDerpeningAPI/Dockerfile .
           docker push 144.17.92.12:5000/riley/thederpeningapi:2
+          cd kube-config
+          kubectl -n riley delete configmap otel-config || true
+          kubectl -n riley create configmap otel-config --from-file=otel-collector-config.yml
+          cd..
           kubectl apply -f kube/
       #     kubectl -n riley create configmap blazor-web-postgres-init --from-file=init.sql
+          
 
 
       - name: Set up unit and integrated Tests

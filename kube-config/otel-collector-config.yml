@@ -1,0 +1,40 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+
+exporters:
+  debug:
+    verbosity: detailed
+  prometheus:
+    endpoint: derp-otel:8889
+  otlp:
+    endpoint: derp-tempo:4317
+    tls:
+      insecure: true
+  loki:
+    endpoint: http://derp-loki:3100/loki/api/v1/push
+    tls:
+      insecure: true
+  zipkin:
+    endpoint: http://derp-zipkin:9411/api/v2/spans
+    tls:
+      insecure: true
+
+extensions:
+  zpages:
+     endpoint: otel:55679
+
+service:
+  extensions: [zpages]  # Enable zpages
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      exporters: [prometheus]
+    traces:
+      receivers: [otlp]
+      exporters: [zipkin]
+    logs:
+      receivers: [otlp]
+      exporters: [loki]
