@@ -19,12 +19,12 @@ spec:
       - name: otel-collector
         image: otel/opentelemetry-collector-contrib
         ports:
-        - containerPort: 8080
+        - containerPort: 4317
         volumeMounts:
         - name: otel-config-volume
-          mountPath: /etc/otel-collector-config.yaml
-          subPath: otel-collector-config.yml
-    volumes: 
-    - name: otel-config-volume
-      configMap:
-        name: otel-config
+          mountPath: /etc/otelcol-contrib/config.yaml
+          subPath: otel-collector-config.yml # from chatgpt may be wrong
+      volumes:
+      - name: otel-config-volume
+        configMap:
+          name: otel-config

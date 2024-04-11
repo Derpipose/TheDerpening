@@ -37,7 +37,7 @@ builder.Logging.AddOpenTelemetry(options =>
         .AddConsoleExporter()
         .AddOtlpExporter(o =>
             {
-                o.Endpoint = new Uri("http://derp-otel-collector:4317");
+                o.Endpoint = new Uri(builder.Configuration["COLLECTOR_URL"] ?? throw new NullReferenceException("COLLECTOR_URL not found"));
             });
 });
 

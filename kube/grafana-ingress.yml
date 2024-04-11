@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: riley
+  name: thederpening-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: grafana.derpserver.duckdns.org
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: grafana-service
+            port:
+              number: 80
+
+              

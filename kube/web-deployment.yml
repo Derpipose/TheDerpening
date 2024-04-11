@@ -25,3 +25,7 @@ spec:
           value: http://thederpeningapi-service:80
         - name: MYDATABASECONNECTIONSTRING
           value: Server=thederpening-db-service;password=riley-password;user id=riley-user;database=rileydb;
+        - name: COLLECTOR_URL
+          value: http://otel-collector-service:4317/
+        - name: LOKI_URL
+          value: http://loki-service:3100/
