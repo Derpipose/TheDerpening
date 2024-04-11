@@ -27,7 +27,7 @@ extensions:
   #    endpoint: otel:55679
 
 service:
-  extensions: [zpages]  # Enable zpages
+  extensions: []  # Enable zpages
   pipelines:
     logs:
       receivers: [otlp]

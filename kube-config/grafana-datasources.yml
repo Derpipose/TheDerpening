@@ -1,0 +1,15 @@
+apiVersion: 1
+
+datasources:
+- name: Grafana
+  type: grafana
+  uid: grafana
+  access: proxy
+  url: http://derp-grafana:3000
+  #url: http://prometheus:9876
+  jsonData:
+    timeInterval: 10s
+  basicAuth: false
+  isDefault: true
+  version: 1
+  editable: false
