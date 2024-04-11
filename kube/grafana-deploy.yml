@@ -32,4 +32,4 @@ spec:
       volumes:
       - name: datasources
         configMap:
-          name: grafana-datasource-config
+          name: grafana-datasources-config
