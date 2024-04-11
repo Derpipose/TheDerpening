@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   namespace: riley
-  name: thederpening-ingress
+  name: grafana-ingress
 spec:
   ingressClassName: nginx
   rules:
