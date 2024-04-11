@@ -20,4 +20,3 @@ spec:
         image: otel/opentelemetry-collector-contrib
         ports:
         - containerPort: 3100
-        command: [/etc/loki/local-config.yaml]
