@@ -46,6 +46,8 @@ namespace TheDerpening.Data.Models
             using var activity = DerpingMonitor.source.StartActivity("Getting all derp things");
             activity?.SetTag("DerpingAttempt", 1);
             DerpingMonitor.countAdd.Add(1);
+
+
             var mylist = await _listDbContext.Todos.ToListAsync();
             List<TodoListItem> list = new List<TodoListItem>();
             list = mylist;
@@ -65,8 +67,12 @@ namespace TheDerpening.Data.Models
             {
                 using var activity = DerpingMonitor.source.StartActivity("Getting a derp thing");
                 activity?.SetTag("DerpAdding", 2);
+
+
                 _listDbContext.Todos.Add(obj);
                 await _listDbContext.SaveChangesAsync();
+
+
                 activity?.Stop();
                 BlepAlert(_logger, "blep :P");
                 DerpingMonitor.upDownCounter.Add(1);
@@ -86,7 +92,10 @@ namespace TheDerpening.Data.Models
         public async Task Delete(int id)
         {
             var itemtoberemoved = await _listDbContext.Todos.Where(T => T.Id == id).FirstOrDefaultAsync();
-            if (itemtoberemoved != null) { _listDbContext.Todos.Remove(itemtoberemoved); }
+            if (itemtoberemoved != null)
+            {
+                _listDbContext.Todos.Remove(itemtoberemoved);
+            }
             else
             {
                 LogWarningMessage(_logger, "Item does not exist");

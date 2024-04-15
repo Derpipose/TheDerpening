@@ -32,7 +32,6 @@ jobs:
       #     kubectl -n riley create configmap blazor-web-postgres-init --from-file=init.sql
           
 
-
       - name: Set up unit and integrated Tests
         run: |
           cd TheTesting
