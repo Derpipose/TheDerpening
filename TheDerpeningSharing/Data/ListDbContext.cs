@@ -11,6 +11,5 @@ namespace TheDerpening.Data
         {
         }
 
-
     }
 }
