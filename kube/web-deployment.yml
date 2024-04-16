@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: thederpening
-        image: 144.17.92.12:5000/riley/thederpening:2
+        image: 144.17.92.12:5000/riley/thederpening:$GITHUB_RUN_ID
         ports:
         - containerPort: 8080
         env:
