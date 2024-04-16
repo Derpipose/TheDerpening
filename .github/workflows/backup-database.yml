@@ -8,6 +8,6 @@ jobs:
             - name: backup
               run: |
                 containerName = $(kubectl -n riley get pods --no-headers -o custom-columns=":metadata.name" | grep "thederpening-db-deployment")
-                kubectl -n riley exec -t containerName -- \
+                kubectl -n riley exec -t $containerName -- \
                     pg_dumpall -c -U riley-user \
                     > /home/riley/dump.sql
