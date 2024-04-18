@@ -12,7 +12,11 @@ jobs:
             - name: deploy kubernetes environment
               run: |
                 export PULL_REQUEST_ID=${{ github.event.pull_request.number }}
-                kubectl create namespace riley-pr-$PULL_REQUEST_ID || true
+                export NAMESPACE="riley-pr-$PULL_REQUEST_ID"
+                kubectl create namespace $NAMESPACE || true
 
-                kubectl -n riley-pr-$PULL_REQUEST_ID delete configmap blazor-web-postgres-init || true
-                kubectl -n riley-pr-$PULL_REQUEST_ID delete configmap blazor-web-postgres-init --from-file=init.sql
+                kubectl -n $NAMESPACE delete configmap blazor-web-postgres-init || true
+                kubectl -n $NAMESPACE delete configmap blazor-web-postgres-init --from-file=init.sql
+
+                export RUN_SALT="pr-${$GITHUB_RUN_ID}-"
+                docker build -t 144.17.92.12:5000/riley/thederpening:$GITHUB_RUN_ID -f TheDerpening/Dockerfile .

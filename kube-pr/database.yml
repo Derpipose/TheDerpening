@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: $NAMESPACE
+  name: thederpening-db-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 0.5Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: $NAMESPACE
+  name: thederpening-db-deployment
+  labels:
+    app: thederpening-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: thederpening-db
+  template:
+    metadata:
+      labels:
+        app: thederpening-db
+    spec:
+      containers:
+      - name: thederpening-db
+        image: postgres
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_USER
+          value: riley-user
+        - name: POSTGRES_PASSWORD
+          value: riley-password
+        - name: POSTGRES_DB
+          value: rileydb
+        volumeMounts:
+        - name: postgresstorage
+          mountPath: /var/lib/postgresql/data
+        - name: init-script
+          mountPath: /docker-entrypoint-initdb.d
+      volumes:
+      - name: postgresstorage
+        persistentVolumeClaim:
+          claimName: thederpening-db-pvc
+      - name: init-script
+        configMap:
+          name: blazor-web-postgres-init
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: $NAMESPACE
+  name: thederpening-db-service
+spec:
+  type: ClusterIP
+  selector:
+    app: thederpening-db
+  ports:
+    - port: 5432
+      targetPort: 5432

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: $NAMESPACE
+  name: thederpening-deployment
+  labels:
+    app: thederpening
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: thederpening
+  template:
+    metadata:
+      labels:
+        app: thederpening
+    spec:
+      containers:
+      - name: thederpening
+        image: 144.17.92.12:5000/riley/thederpening:$GITHUB_RUN_ID
+        ports:
+        - containerPort: 8080
+        env:
+        - name: apiaccess
+          value: http://thederpeningapi-service:80
+        - name: MYDATABASECONNECTIONSTRING
+          value: Server=thederpening-db-service;password=riley-password;user id=riley-user;database=rileydb;
+        - name: COLLECTOR_URL
+          value: http://otel-collector-service:4317/
+        - name: LOKI_URL
+          value: http://loki-service:3100/
