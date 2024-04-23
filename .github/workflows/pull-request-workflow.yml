@@ -15,8 +15,8 @@ jobs:
                 export NAMESPACE="riley-pr-$PULL_REQUEST_ID"
                 kubectl create namespace $NAMESPACE || true
 
-                kubectl -n $NAMESPACE delete configmap blazor-web-postgres-init || true
-                kubectl -n $NAMESPACE delete configmap blazor-web-postgres-init --from-file=init.sql
+                kubectl -n $NAMESPACE delete configmap thederpening-postgres-init || true
+                kubectl -n $NAMESPACE create configmap thederpening-postgres-init --from-file=init.sql
 
                 export RUN_SALT="pr-${$GITHUB_RUN_ID}-"
                 docker build -t 144.17.92.12:5000/riley/thederpening:$GITHUB_RUN_ID -f TheDerpening/Dockerfile .

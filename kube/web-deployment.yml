@@ -29,3 +29,15 @@ spec:
           value: http://otel-collector-service:4317/
         - name: LOKI_URL
           value: http://loki-service:3100/
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        redinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
